@@ -1,3 +1,6 @@
 rootProject.name = 'jpanda'
 include 'client'
+include 'master'
+include 'slave'
+include 'core'
 
