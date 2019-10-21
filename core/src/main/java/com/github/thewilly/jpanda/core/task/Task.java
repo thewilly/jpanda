@@ -1,7 +1,39 @@
 package com.github.thewilly.jpanda.core.task;
 
-import com.github.thewilly.jpanda.core.job.Job;
+import com.github.thewilly.jpanda.core.Workload;
 
-public interface Task extends Job {
+import java.util.function.Function;
 
+/**
+ * The interface Task.
+ */
+public interface Task {
+
+    /**
+     * Gets workload.
+     *
+     * @return the workload
+     */
+    Workload getWorkload();
+
+    /**
+     * Gets function.
+     *
+     * @return the function
+     */
+    Function getFunction();
+
+    /**
+     * Gets result.
+     *
+     * @return the result
+     */
+    TaskResult getResult();
+
+    /**
+     * Has finished boolean.
+     *
+     * @return the boolean
+     */
+    boolean isDone();
 }

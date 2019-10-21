@@ -36,5 +36,5 @@ public interface Job extends Serializable {
      *
      * @return the boolean
      */
-    boolean hasFinished();
+    boolean isDone();
 }
