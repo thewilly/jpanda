@@ -6,8 +6,14 @@ import com.github.thewilly.jpanda.slave.task.DefaultTaskExecutor;
 
 import java.net.InetSocketAddress;
 
+/**
+ * The type Default client node.
+ */
 public class DefaultClientNode implements ClientNode {
 
+    /**
+     * The constant NUMBER_OF_CORES.
+     */
     public final static int NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors();
 
     private final String nodeId;
@@ -16,6 +22,13 @@ public class DefaultClientNode implements ClientNode {
 
     private ClientNodeState nodeState = ClientNodeState.READY;
 
+    /**
+     * Instantiates a new Default client node.
+     *
+     * @param nodeId the node id
+     * @param ip     the ip
+     * @param port   the port
+     */
     public DefaultClientNode(String nodeId, String ip, int port) {
         this.nodeId = nodeId;
         this.clientNodeAdress = new InetSocketAddress(ip, port);
