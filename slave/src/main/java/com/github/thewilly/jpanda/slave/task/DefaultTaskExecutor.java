@@ -6,12 +6,20 @@ import com.github.thewilly.jpanda.slave.node.DefaultClientNode;
 
 import java.util.function.Function;
 
+/**
+ * The type Default task executor.
+ */
 public class DefaultTaskExecutor implements TaskExecutor {
 
     private final Task executingTask;
     private final Object[] workload;
     private final Function function;
 
+    /**
+     * Instantiates a new Default task executor.
+     *
+     * @param taskToExecute the task to execute
+     */
     public DefaultTaskExecutor(Task taskToExecute) {
         this.executingTask = taskToExecute;
         this.workload = taskToExecute.getWorkload().getWorkload().toArray();
