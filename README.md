@@ -30,4 +30,4 @@ int[] result = jpanda.getResultsForJob("compute-squares");
 ````
 
 ### Why JPanda?
-J cames from Java of course and Panda from Parallel Distributed Architechture, JPDA would be much much boring dont you think?
+J cames from Java of course and Panda from Parallel Distributed Architecture, JPDA would be much much boring dont you think?
