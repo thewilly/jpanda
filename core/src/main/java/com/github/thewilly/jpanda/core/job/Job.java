@@ -7,29 +7,32 @@ import java.util.function.Function;
 
 /**
  * The interface com.github.thewilly.jpanda.core.job.Job.
+ *
+ * @param <T> the type parameter
+ * @param <K> the type parameter
  */
-public interface Job extends Serializable {
+public interface Job<T extends Serializable, K extends Serializable> extends Serializable {
 
     /**
      * Gets workload.
      *
      * @return the workload
      */
-    Workload getWorkload();
+    Workload<T> getWorkload();
 
     /**
      * Gets function.
      *
      * @return the function
      */
-    Function getFunction();
+    Function<T, K> getFunction();
 
     /**
      * Gets result.
      *
      * @return the result
      */
-    JobResult getResult();
+    JobResult<K> getResult();
 
     /**
      * Has finished boolean.
