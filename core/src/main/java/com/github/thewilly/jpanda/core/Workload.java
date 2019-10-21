@@ -1,23 +1,26 @@
 package com.github.thewilly.jpanda.core;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * The interface com.github.thewilly.jpanda.core.Workload.
+ *
+ * @param <T> the type parameter
  */
-public interface Workload {
+public interface Workload<T extends Serializable> extends Serializable {
 
     /**
      * Gets size.
      *
      * @return the size
      */
-    long getSize();
+    int getSize();
 
     /**
      * Gets workload.
      *
      * @return the workload
      */
-    Collection getWorkload();
+    T[] getWorkload();
 }
