@@ -1,7 +1,8 @@
 package com.github.thewilly.jpanda.master.rest;
 
+import com.github.thewilly.jpanda.core.AggregableResult;
+import com.github.thewilly.jpanda.core.SplitableWorkload;
 import com.github.thewilly.jpanda.core.job.Job;
-import com.github.thewilly.jpanda.core.job.JobResult;
 import com.github.thewilly.jpanda.core.task.TaskResult;
 import com.github.thewilly.jpanda.slave.node.ClientNode;
 
@@ -9,8 +10,11 @@ import java.io.Serializable;
 
 /**
  * The interface Rest operations.
+ *
+ * @param <T> the type parameter
+ * @param <K> the type parameter
  */
-public interface RestOperations<T extends Serializable,K extends Serializable> {
+public interface RestOperations<T extends SplitableWorkload<T>,K extends AggregableResult<T>> {
 
     /**
      * Submit job boolean.
@@ -26,7 +30,7 @@ public interface RestOperations<T extends Serializable,K extends Serializable> {
      * @param jobId the job id
      * @return the job result
      */
-    JobResult<K> getJobResult(String jobId);
+    AggregableResult<K> getJobResult(String jobId);
 
     /**
      * Is job done boolean.
