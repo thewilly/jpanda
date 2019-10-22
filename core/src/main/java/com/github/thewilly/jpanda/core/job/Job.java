@@ -1,6 +1,9 @@
 package com.github.thewilly.jpanda.core.job;
 
-import com.github.thewilly.jpanda.core.Workload;
+import com.github.thewilly.jpanda.core.Aggregable;
+import com.github.thewilly.jpanda.core.AggregableResult;
+import com.github.thewilly.jpanda.core.Splitable;
+import com.github.thewilly.jpanda.core.SplitableWorkload;
 
 import java.io.Serializable;
 import java.util.function.Function;
@@ -11,14 +14,14 @@ import java.util.function.Function;
  * @param <T> the type parameter
  * @param <K> the type parameter
  */
-public interface Job<T extends Serializable, K extends Serializable> extends Serializable {
+public interface Job<T extends SplitableWorkload, K extends AggregableResult> extends Serializable {
 
     /**
      * Gets workload.
      *
      * @return the workload
      */
-    Workload<T> getWorkload();
+    SplitableWorkload<T> getWorkload();
 
     /**
      * Gets function.
@@ -32,7 +35,7 @@ public interface Job<T extends Serializable, K extends Serializable> extends Ser
      *
      * @return the result
      */
-    JobResult<K> getResult();
+    AggregableResult<K> getResult();
 
     /**
      * Has finished boolean.

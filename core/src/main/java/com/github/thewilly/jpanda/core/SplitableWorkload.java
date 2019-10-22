@@ -8,19 +8,12 @@ import java.util.Collection;
  *
  * @param <T> the type parameter
  */
-public interface Workload<T extends Serializable> extends Serializable {
-
-    /**
-     * Gets size.
-     *
-     * @return the size
-     */
-    int getSize();
+public interface SplitableWorkload<T extends Serializable> extends Splitable<T> {
 
     /**
      * Gets workload.
      *
      * @return the workload
      */
-    T[] getWorkload();
+    T[] getData();
 }
