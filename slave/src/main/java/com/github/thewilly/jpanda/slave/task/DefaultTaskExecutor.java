@@ -12,8 +12,6 @@ import java.util.function.Function;
 public class DefaultTaskExecutor implements TaskExecutor {
 
     private final Task executingTask;
-    private final Object[] workload;
-    private final Function function;
 
     /**
      * Instantiates a new Default task executor.
@@ -22,58 +20,48 @@ public class DefaultTaskExecutor implements TaskExecutor {
      */
     public DefaultTaskExecutor(Task taskToExecute) {
         this.executingTask = taskToExecute;
-        this.workload = taskToExecute.getWorkload().getWorkload().toArray();
-        this.function = this.executingTask.getFunction();
     }
 
     @Override
     public TaskResult execute() {
         Thread[] threads = new Thread[DefaultClientNode.NUMBER_OF_CORES];
 
-        if(executingTask.getWorkload().getSize() <= DefaultClientNode.NUMBER_OF_CORES) {
-            for(int i = 0; i<workload.length; i++) {
+        if(executingTask.getWorkload().getData().length <= DefaultClientNode.NUMBER_OF_CORES) {
+            for(int i = 0; i<executingTask.getWorkload().getData().length; i++) {
                 int finalI = i;
                 threads[i] = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        function.apply(workload[finalI]);
+                        executingTask.getFunction().apply(executingTask.getWorkload().getData()[finalI]);
                     }
                 });
             }
         } else {
 
-            int itemsPerThread = workload.length / DefaultClientNode.NUMBER_OF_CORES;
-            boolean isWorkloadBalanced = workload.length % DefaultClientNode.NUMBER_OF_CORES == 0;
+            int itemsPerThread = executingTask.getWorkload().getData().length / DefaultClientNode.NUMBER_OF_CORES;
+            boolean isWorkloadBalanced = executingTask.getWorkload().getData().length % DefaultClientNode.NUMBER_OF_CORES == 0;
 
             for(int i = 0; i < DefaultClientNode.NUMBER_OF_CORES; i++) {
                 int finalI = i;
-                threads[i] = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        int startPos = finalI*itemsPerThread;
-                        int endPos = startPos + itemsPerThread;
-                        for(int i = startPos; i < endPos; i++ ) {
-                            function.apply(workload[i]);
-                        }
+                threads[i] = new Thread(() -> {
+                    int startPos = finalI*itemsPerThread;
+                    int endPos = startPos + itemsPerThread;
+                    for(int i1 = startPos; i1 < endPos; i1++ ) {
+                        executingTask.getFunction().apply(executingTask.getWorkload().getData()[i1]);
                     }
                 });
 
                 if(!isWorkloadBalanced && i==DefaultClientNode.NUMBER_OF_CORES-1) {
-                    threads[i] = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            int startPos = finalI*itemsPerThread;
-                            int endPos = workload.length;
-                            for(int i = startPos; i < endPos; i++ ) {
-                                function.apply(workload[i]);
-                            }
+                    threads[i] = new Thread(() -> {
+                        int startPos = finalI*itemsPerThread;
+                        int endPos = executingTask.getWorkload().getData().length;
+                        for(int i12 = startPos; i12 < endPos; i12++ ) {
+                            executingTask.getFunction().apply(executingTask.getWorkload().getData()[i12]);
                         }
                     });
                 }
-            }
 
-            for(Thread t : threads) {
-                t.start();
+                threads[i].start();
             }
 
             for(Thread t : threads) {
