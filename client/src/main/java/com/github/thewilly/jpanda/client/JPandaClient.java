@@ -4,7 +4,7 @@ import com.github.thewilly.jpanda.client.exception.JobNotFoundException;
 import com.github.thewilly.jpanda.client.exception.MasterNodeNotAvailableException;
 import com.github.thewilly.jpanda.client.exception.ResultsNotAvailableException;
 import com.github.thewilly.jpanda.core.job.Job;
-import com.github.thewilly.jpanda.core.job.JobResult;
+import com.github.thewilly.jpanda.core.AggregableResult;
 
 /**
  * The interface J panda client.
@@ -45,7 +45,7 @@ public interface JPandaClient {
      * @throws ResultsNotAvailableException the results not available exception
      * @throws JobNotFoundException         the job not found exception
      */
-    JobResult getJobResult(String jobId) throws ResultsNotAvailableException, JobNotFoundException;
+    AggregableResult getJobResult(String jobId) throws ResultsNotAvailableException, JobNotFoundException;
 
     /**
      * Sets configuration.
