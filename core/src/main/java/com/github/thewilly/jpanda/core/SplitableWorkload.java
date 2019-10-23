@@ -1,7 +1,6 @@
 package com.github.thewilly.jpanda.core;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  * The interface com.github.thewilly.jpanda.core.Workload.

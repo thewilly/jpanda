@@ -1,8 +1,6 @@
 package com.github.thewilly.jpanda.core.job;
 
-import com.github.thewilly.jpanda.core.Aggregable;
 import com.github.thewilly.jpanda.core.AggregableResult;
-import com.github.thewilly.jpanda.core.Splitable;
 import com.github.thewilly.jpanda.core.SplitableWorkload;
 
 import java.io.Serializable;
@@ -15,6 +13,13 @@ import java.util.function.Function;
  * @param <K> the type parameter
  */
 public interface Job<T extends SplitableWorkload, K extends AggregableResult> extends Serializable {
+
+    /**
+     * Gets the id.
+     *
+     * @return the id.
+     */
+    String getId();
 
     /**
      * Gets workload.
