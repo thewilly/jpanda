@@ -3,4 +3,5 @@ include 'client'
 include 'master'
 include 'slave'
 include 'core'
+include 'code-examples'
 
