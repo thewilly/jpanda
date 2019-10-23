@@ -5,8 +5,9 @@ import com.github.thewilly.jpanda.core.SplitableWorkload;
 import com.github.thewilly.jpanda.core.job.Job;
 import com.github.thewilly.jpanda.core.task.TaskResult;
 import com.github.thewilly.jpanda.slave.node.ClientNode;
-
-import java.io.Serializable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The interface Rest operations.
@@ -14,6 +15,8 @@ import java.io.Serializable;
  * @param <T> the type parameter
  * @param <K> the type parameter
  */
+@RestController
+@RequestMapping("default")
 public interface RestOperations<T extends SplitableWorkload<T>,K extends AggregableResult<T>> {
 
     /**
@@ -22,6 +25,7 @@ public interface RestOperations<T extends SplitableWorkload<T>,K extends Aggrega
      * @param job the job
      * @return the boolean
      */
+    @RequestMapping(value = "/job", method = RequestMethod.POST)
     boolean submitJob(Job<T,K> job);
 
     /**

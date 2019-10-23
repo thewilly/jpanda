@@ -4,8 +4,6 @@ import com.github.thewilly.jpanda.core.task.Task;
 import com.github.thewilly.jpanda.core.task.TaskResult;
 import com.github.thewilly.jpanda.slave.node.DefaultClientNode;
 
-import java.util.function.Function;
-
 /**
  * The type Default task executor.
  */
